@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es5",                                
-    "module": "ES6",                           
-    "outFile": "./",                             
-    "outDir": "./dist",                              
-    "strict": true,                                 
-    "noImplicitAny": true,                       
-    "esModuleInterop": true,                        
-    "skipLibCheck": true,                           
-    "forceConsistentCasingInFileNames": true        
+    "target": "es5",
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   }
 }
