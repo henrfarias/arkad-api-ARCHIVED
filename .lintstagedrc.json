@@ -1,6 +1,6 @@
 {
   "*.([jt]s)": [
-    "eslint --cache --fix", 
+    "eslint --fix", 
     "prettier --write",
     "npm run test:staged"
   ]
