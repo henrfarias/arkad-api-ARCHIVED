@@ -9,7 +9,10 @@
   "scripts": {
     "prepare": "husky install",
     "format": "eslint --cache --fix && prettier --write ./src",
-    "test": "jest"
+    "test": "jest --watchAll",
+    "test:dev": "jest --watch",
+    "test:staged": "jest --passWithNoTests --findRelatedTests --listTests",
+    "test:cov": "jest --noStackTrace --coverage"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.15.0",
