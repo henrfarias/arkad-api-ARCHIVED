@@ -10,6 +10,8 @@ const config: ConnectionOptions = {
   username: process.env.TYPEORM_USERNAME,
   password: process.env.TYPEORM_PASSWORD,
   database: process.env.TYPEORM_DATABASE,
+  entities: ['./src/db/models/*.ts'],
+  migrations: ['./src/db/migrations/*.ts'],
   cli: {
     migrationsDir: './src/db/migrations',
   },
