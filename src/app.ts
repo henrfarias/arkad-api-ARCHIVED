@@ -1,4 +1,5 @@
 import Express from 'express';
+import './db/db';
 
 class App {
   app: ReturnType<typeof Express>;
