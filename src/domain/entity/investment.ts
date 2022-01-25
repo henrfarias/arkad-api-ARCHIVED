@@ -1,23 +1,21 @@
+import { IInputInvestmentEntity } from '../interface/investment'
 import precise from '../service/precise'
-
-export interface IInputInvestmentEntity {
-  initialValue: number
-  annualInterest: number
-  applicationDate: Date
-  dueDate: Date
-}
 
 export default class Investment {
   readonly initialValue: number
   readonly annualInterest: number
   readonly applicationDate: Date
   readonly dueDate: Date
+  private YEAR_IN_MILISECONDS: number
+  private MONTHS_IN_ONE_YEAR: number
 
   constructor(investment: IInputInvestmentEntity) {
     this.initialValue = investment.initialValue
     this.annualInterest = investment.annualInterest / 100
     this.applicationDate = investment.applicationDate
     this.dueDate = investment.dueDate
+    this.YEAR_IN_MILISECONDS = 3.17098 * 10 ** -11
+    this.MONTHS_IN_ONE_YEAR = 12
   }
 
   public simulate(monthlyContribution?: number): number {
@@ -45,17 +43,17 @@ export default class Investment {
   private timeInYears(): number {
     const timeInMiliseconds =
       this.dueDate.getTime() - this.applicationDate.getTime()
-    const timeInYears = precise(timeInMiliseconds * (3.17098 * 10 ** -11))
+    const timeInYears = precise(timeInMiliseconds * this.YEAR_IN_MILISECONDS)
     return timeInYears
   }
 
   private timeInMonths(): number {
-    const timeInMonths = this.timeInYears() * 12
+    const timeInMonths = this.timeInYears() * this.MONTHS_IN_ONE_YEAR
     return timeInMonths
   }
 
   private monthlyInterest(): number {
-    const monthlyInterest = this.annualInterest / 12
+    const monthlyInterest = this.annualInterest / this.MONTHS_IN_ONE_YEAR
     return monthlyInterest
   }
 }
