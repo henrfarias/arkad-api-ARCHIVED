@@ -9,10 +9,10 @@
   "scripts": {
     "prepare": "husky install",
     "format": "eslint --cache --fix && prettier --write ./src",
-    "test": "jest --watchAll",
+    "test": "jest",
     "test:dev": "jest --watch",
     "test:staged": "jest --passWithNoTests --findRelatedTests --listTests",
-    "test:cov": "jest --noStackTrace --coverage",
+    "test:cov": "jest --coverage",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
   },
