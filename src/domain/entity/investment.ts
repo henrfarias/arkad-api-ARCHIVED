@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import { IInputInvestmentEntity } from '../interface/investment'
 import precise from '../service/precise'
 
@@ -10,10 +11,11 @@ export default class Investment {
   private MONTHS_IN_ONE_YEAR: number
 
   constructor(investment: IInputInvestmentEntity) {
-    this.initialValue = investment.initialValue
-    this.annualInterest = investment.annualInterest / 100
     this.applicationDate = investment.applicationDate
     this.dueDate = investment.dueDate
+    if (this.isInvalidRangeOfDate()) throw new Error('Invalid range of date')
+    this.initialValue = investment.initialValue
+    this.annualInterest = investment.annualInterest / 100
     this.YEAR_IN_MILISECONDS = 3.17098 * 10 ** -11
     this.MONTHS_IN_ONE_YEAR = 12
   }
@@ -55,5 +57,10 @@ export default class Investment {
   private monthlyInterest(): number {
     const monthlyInterest = this.annualInterest / this.MONTHS_IN_ONE_YEAR
     return monthlyInterest
+  }
+
+  private isInvalidRangeOfDate(): boolean {
+    const dateDiff = this.dueDate.getTime() - this.applicationDate.getTime()
+    return dateDiff < 0
   }
 }

@@ -1,6 +1,5 @@
-import Investment, {
-  IInputInvestmentEntity,
-} from '../../src/domain/entity/investment'
+import Investment from '../../src/domain/entity/investment'
+import { IInputInvestmentEntity } from '../../src/domain/interface/investment'
 
 describe('Investment entity', () => {
   test('Should simulate the initial investment with compound interest ', () => {
@@ -25,5 +24,17 @@ describe('Investment entity', () => {
     const investment = new Investment(investmentData)
     const result = investment.simulate(500)
     expect(result).toBe(46765.86)
+  })
+
+  test('Should throw an error if dueDate is smallest of applicationDate', () => {
+    const investmentData: IInputInvestmentEntity = {
+      applicationDate: new Date('2024-01-01T00:00:00.000Z'),
+      dueDate: new Date('2022-01-01T00:00:00.000Z'),
+      annualInterest: 6.4,
+      initialValue: 1000,
+    }
+    expect(() => new Investment(investmentData)).toThrow(
+      new Error('Invalid range of date')
+    )
   })
 })
