@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import { IInputInvestmentEntity } from '../interface/investment'
 import precise from '../service/precise'
 
