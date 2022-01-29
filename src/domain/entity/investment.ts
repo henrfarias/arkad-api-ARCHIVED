@@ -10,12 +10,12 @@ export default class Investment {
   private YEAR_IN_MILISECONDS: number
   private MONTHS_IN_ONE_YEAR: number
 
-  constructor(investment: IInputInvestmentEntity) {
-    this.applicationDate = investment.applicationDate
-    this.dueDate = investment.dueDate
+  constructor(input: IInputInvestmentEntity) {
+    this.applicationDate = input.applicationDate
+    this.dueDate = input.dueDate
     if (this.isInvalidRangeOfDate()) throw new Error('Invalid range of date')
-    this.initialValue = investment.initialValue
-    this.annualInterest = investment.annualInterest / 100
+    this.initialValue = input.initialValue
+    this.annualInterest = input.annualInterest / 100
     this.YEAR_IN_MILISECONDS = 3.17098 * 10 ** -11
     this.MONTHS_IN_ONE_YEAR = 12
   }
