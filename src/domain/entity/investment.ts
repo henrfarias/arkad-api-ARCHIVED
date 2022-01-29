@@ -1,22 +1,24 @@
 import { IInputInvestmentEntity } from '../interface/investment'
-import precise from '../service/precise'
+import precise from '../../shared/helpers/precise'
+import IDateService from '../interface/date-service'
 
 export default class Investment {
   readonly initialValue: number
   readonly annualInterest: number
   readonly applicationDate: Date
   readonly dueDate: Date
-  private YEAR_IN_MILISECONDS: number
-  private MONTHS_IN_ONE_YEAR: number
 
-  constructor(input: IInputInvestmentEntity) {
-    this.applicationDate = input.applicationDate
-    this.dueDate = input.dueDate
-    if (this.isInvalidRangeOfDate()) throw new Error('Invalid range of date')
+  constructor(
+    input: IInputInvestmentEntity,
+    private dateService: IDateService
+  ) {
+    this.dateService.init(input.applicationDate, input.dueDate)
+    if (this.dateService.isInvalidRangeOfDate())
+      throw new Error('Invalid range of date')
     this.initialValue = input.initialValue
     this.annualInterest = input.annualInterest / 100
-    this.YEAR_IN_MILISECONDS = 3.17098 * 10 ** -11
-    this.MONTHS_IN_ONE_YEAR = 12
+    this.applicationDate = input.applicationDate
+    this.dueDate = input.dueDate
   }
 
   public simulate(monthlyContribution?: number): number {
@@ -29,37 +31,22 @@ export default class Investment {
 
   private calcFinalAmount(): number {
     return precise(
-      this.initialValue * (1 + this.annualInterest) ** this.timeInYears()
+      this.initialValue *
+        (1 + this.annualInterest) ** this.dateService.timeInYears()
     )
   }
 
   private calcFutureValue(monthlyContribution: number): number {
     return precise(
       (monthlyContribution *
-        ((1 + this.monthlyInterest()) ** this.timeInMonths() - 1)) /
+        ((1 + this.monthlyInterest()) ** this.dateService.timeInMonths() - 1)) /
         this.monthlyInterest()
     )
   }
 
-  private timeInYears(): number {
-    const timeInMiliseconds =
-      this.dueDate.getTime() - this.applicationDate.getTime()
-    const timeInYears = precise(timeInMiliseconds * this.YEAR_IN_MILISECONDS)
-    return timeInYears
-  }
-
-  private timeInMonths(): number {
-    const timeInMonths = this.timeInYears() * this.MONTHS_IN_ONE_YEAR
-    return timeInMonths
-  }
-
   private monthlyInterest(): number {
-    const monthlyInterest = this.annualInterest / this.MONTHS_IN_ONE_YEAR
+    const monthlyInterest =
+      this.annualInterest / this.dateService.MONTHS_IN_ONE_YEAR
     return monthlyInterest
-  }
-
-  private isInvalidRangeOfDate(): boolean {
-    const dateDiff = this.dueDate.getTime() - this.applicationDate.getTime()
-    return dateDiff < 0
   }
 }

@@ -1,5 +1,6 @@
 import Investment from '../../src/domain/entity/investment'
 import { IInputInvestmentEntity } from '../../src/domain/interface/investment'
+import DateService from '../../src/domain/service/date-service'
 
 describe('Investment entity', () => {
   test('Should simulate the initial investment with compound interest ', () => {
@@ -9,7 +10,8 @@ describe('Investment entity', () => {
       annualInterest: 6.4,
       initialValue: 1000,
     }
-    const investment = new Investment(investmentData)
+    const dateService = new DateService()
+    const investment = new Investment(investmentData, dateService)
     const result = investment.simulate()
     expect(result).toBe(1132.1)
   })
@@ -21,7 +23,8 @@ describe('Investment entity', () => {
       annualInterest: 5,
       initialValue: 10000,
     }
-    const investment = new Investment(investmentData)
+    const dateService = new DateService()
+    const investment = new Investment(investmentData, dateService)
     const result = investment.simulate(500)
     expect(result).toBe(46765.86)
   })
@@ -33,7 +36,8 @@ describe('Investment entity', () => {
       annualInterest: 6.4,
       initialValue: 1000,
     }
-    expect(() => new Investment(investmentData)).toThrow(
+    const dateService = new DateService()
+    expect(() => new Investment(investmentData, dateService)).toThrow(
       new Error('Invalid range of date')
     )
   })
