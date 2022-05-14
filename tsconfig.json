@@ -13,5 +13,6 @@
     "strictPropertyInitialization": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
-  }
+  },
+  "extends": "./tsconfig.paths.json",
 }

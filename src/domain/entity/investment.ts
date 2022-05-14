@@ -1,6 +1,6 @@
-import { IInputInvestmentEntity } from '../interface/investment'
-import precise from '../../shared/helpers/precise'
-import IDateService from '../interface/date-service'
+import precise from '@shared/helpers/precise'
+import { IInputInvestmentEntity } from '@domain/interface/investment'
+import IDateService from '@domain/interface/date-service'
 
 export default class Investment {
   readonly initialValue: number

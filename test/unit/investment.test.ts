@@ -1,6 +1,6 @@
-import Investment from '../../src/domain/entity/investment'
-import { IInputInvestmentEntity } from '../../src/domain/interface/investment'
-import DateService from '../../src/domain/service/date-service'
+import Investment from '@domain/entity/investment'
+import { IInputInvestmentEntity } from '@domain/interface/investment'
+import DateService from '@domain/service/date-service'
 
 describe('Investment entity', () => {
   test('Should simulate the initial investment with compound interest ', () => {
