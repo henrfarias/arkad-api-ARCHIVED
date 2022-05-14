@@ -21,12 +21,8 @@ export default class Investment {
     this.dueDate = input.dueDate
   }
 
-  public simulate(monthlyContribution?: number): number {
-    let result = this.calcFinalAmount()
-    if (monthlyContribution) {
-      result += this.calcFutureValue(monthlyContribution)
-    }
-    return result
+  public simulate(): number {
+    return this.calcFinalAmount()
   }
 
   private calcFinalAmount(): number {
@@ -34,19 +30,5 @@ export default class Investment {
       this.initialValue *
         (1 + this.annualInterest) ** this.dateService.timeInYears()
     )
-  }
-
-  private calcFutureValue(monthlyContribution: number): number {
-    return precise(
-      (monthlyContribution *
-        ((1 + this.monthlyInterest()) ** this.dateService.timeInMonths() - 1)) /
-        this.monthlyInterest()
-    )
-  }
-
-  private monthlyInterest(): number {
-    const monthlyInterest =
-      this.annualInterest / this.dateService.MONTHS_IN_ONE_YEAR
-    return monthlyInterest
   }
 }
