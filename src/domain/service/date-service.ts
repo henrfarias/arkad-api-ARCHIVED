@@ -1,5 +1,5 @@
-import precise from '../../shared/helpers/precise'
-import IDateService from '../interface/date-service'
+import precise from '@shared/helpers/precise'
+import IDateService from '@domain/interface/date-service'
 
 export default class DateService implements IDateService {
   startDate: Date
