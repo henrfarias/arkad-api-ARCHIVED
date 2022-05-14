@@ -5,7 +5,11 @@ const config: Config.InitialOptions = {
   coverageDirectory: 'coverage',
   coveragePathIgnorePatterns: ['/node_modules/'],
   coverageProvider: 'babel',
-  rootDir: 'test',
+  rootDir: '.',
+  moduleNameMapper: {
+    '@domain/(.*)': '<rootDir>/src/domain/$1',
+    '@shared/(.*)': '<rootDir>/src/shared/$1',
+  },
 }
 
 export default config
