@@ -1,13 +1,15 @@
 import precise from '@shared/helpers/precise'
 import { IInputInvestmentEntity } from '@domain/interface/investment'
 import IDateService from '@domain/interface/date-service'
+import { InvestmentErrors } from '@domain/errors/investment-errors'
+import { IError } from '@shared/error'
 
 export default class Investment {
   readonly initialValue: number
   readonly annualInterest: number
   readonly applicationDate: Date
   readonly dueDate: Date
-  readonly error: Error | null
+  readonly error: IError | null
 
   constructor(
     input: IInputInvestmentEntity,
@@ -16,7 +18,7 @@ export default class Investment {
     this.dateService.init(input.applicationDate, input.dueDate)
     this.error = null
     if (this.dateService.isInvalidRangeOfDate())
-      this.error = new Error('Invalid range of date')
+      this.error = InvestmentErrors.invalidRangeDate()
     this.initialValue = input.initialValue
     this.annualInterest = input.annualInterest / 100
     this.applicationDate = input.applicationDate
