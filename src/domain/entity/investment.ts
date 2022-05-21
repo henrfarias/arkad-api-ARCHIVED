@@ -25,6 +25,10 @@ export default class Investment {
     return this.calcFinalAmount()
   }
 
+  public getGrossProfit(): number {
+    return precise(this.calcFinalAmount() - this.initialValue)
+  }
+
   private calcFinalAmount(): number {
     return precise(
       this.initialValue *
