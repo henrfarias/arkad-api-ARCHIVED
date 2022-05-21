@@ -1,5 +1,5 @@
 import Investment from '@domain/entity/investment'
-import { InvestmentErrors } from '@domain/errors/investment-errors'
+import { BadRequest } from '@domain/errors/base-errors/bad-request'
 import { IInputInvestmentEntity } from '@domain/interface/investment'
 import DateService from '@domain/service/date-service'
 
@@ -27,6 +27,6 @@ describe('Investment entity', () => {
     const dateService = new DateService()
     const investment = new Investment(investmentData, dateService)
     expect(investment.isThereError()).toBeTruthy()
-    expect(investment.error).toStrictEqual(InvestmentErrors.invalidRangeDate())
+    expect(investment.error).toStrictEqual(new BadRequest('Invalid range date'))
   })
 })
