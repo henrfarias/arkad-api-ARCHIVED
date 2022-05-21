@@ -2,19 +2,12 @@ import precise from '@shared/helpers/precise'
 import IDateService from '@domain/interface/date-service'
 
 export default class DateService implements IDateService {
-  startDate: Date
-  endDate: Date
   readonly YEAR_IN_MILISECONDS: number
   readonly MONTHS_IN_ONE_YEAR: number
 
-  constructor() {
+  constructor(readonly startDate: Date, readonly endDate: Date) {
     this.YEAR_IN_MILISECONDS = 3.17098 * 10 ** -11
     this.MONTHS_IN_ONE_YEAR = 12
-  }
-
-  init(startDate: Date, endDate: Date): void {
-    this.startDate = startDate
-    this.endDate = endDate
   }
 
   public timeInYears(): number {

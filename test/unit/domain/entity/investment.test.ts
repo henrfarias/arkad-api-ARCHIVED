@@ -10,7 +10,10 @@ describe('Investment entity', () => {
       annualInterest: 6.4,
       initialValue: 1000,
     }
-    const dateService = new DateService()
+    const dateService = new DateService(
+      investmentData.applicationDate,
+      investmentData.dueDate
+    )
     const investment = new Investment(investmentData, dateService)
     const result = investment.simulate()
     expect(result).toBe(1132.1)
@@ -23,7 +26,10 @@ describe('Investment entity', () => {
       annualInterest: 6.4,
       initialValue: 1000,
     }
-    const dateService = new DateService()
+    const dateService = new DateService(
+      investmentData.applicationDate,
+      investmentData.dueDate
+    )
     expect(() => new Investment(investmentData, dateService)).toThrow(
       new Error('Invalid range of date')
     )
@@ -36,7 +42,10 @@ describe('Investment entity', () => {
       annualInterest: 6.4,
       initialValue: 1000,
     }
-    const dateService = new DateService()
+    const dateService = new DateService(
+      investmentData.applicationDate,
+      investmentData.dueDate
+    )
     const investment = new Investment(investmentData, dateService)
     const result = investment.getGrossProfit()
     expect(result).toBe(132.1)
