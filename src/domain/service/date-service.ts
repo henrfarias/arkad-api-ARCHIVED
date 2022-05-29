@@ -12,7 +12,7 @@ export default class DateService implements IDateService {
 
   public timeInYears(): number {
     const timeInMiliseconds = this.endDate.getTime() - this.startDate.getTime()
-    const timeInYears = precise(timeInMiliseconds * this.YEAR_IN_MILISECONDS)
+    const timeInYears = precise(timeInMiliseconds * this.YEAR_IN_MILISECONDS, 2)
     return timeInYears
   }
 

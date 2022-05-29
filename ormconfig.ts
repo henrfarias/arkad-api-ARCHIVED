@@ -1,7 +1,7 @@
-import { ConnectionOptions } from 'typeorm';
-import dotenv from 'dotenv';
+import { ConnectionOptions } from 'typeorm'
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
 const config: ConnectionOptions = {
   type: 'mysql',
@@ -15,6 +15,6 @@ const config: ConnectionOptions = {
   cli: {
     migrationsDir: './src/db/migrations',
   },
-};
+}
 
-export default config;
+export default config
