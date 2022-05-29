@@ -2,13 +2,14 @@ import precise from '@shared/helpers/precise'
 import { IInputInvestmentEntity } from '@domain/interface/investment'
 import IDateService from '@domain/interface/date-service'
 import { BadRequest } from '@domain/errors/base-errors/bad-request'
+import { CustomError } from '@shared/error'
 
 export default class Investment {
   readonly initialValue: number
   readonly annualInterest: number
   readonly applicationDate: Date
   readonly dueDate: Date
-  readonly error: Error | null
+  readonly error: CustomError | null
 
   constructor(
     input: IInputInvestmentEntity,
