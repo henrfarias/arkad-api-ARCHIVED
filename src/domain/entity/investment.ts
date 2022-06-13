@@ -15,7 +15,6 @@ export default class Investment {
     input: IInputInvestmentEntity,
     private dateService: IDateService
   ) {
-    this.dateService.init(input.applicationDate, input.dueDate)
     this.error = null
     if (this.dateService.isInvalidRangeOfDate())
       this.error = new BadRequest('Invalid range date')
@@ -31,6 +30,10 @@ export default class Investment {
 
   public isThereError(): boolean {
     return this.error !== null
+  }
+  
+  public getGrossProfit(): number {
+    return precise(this.calcFinalAmount() - this.initialValue)
   }
 
   private calcFinalAmount(): number {

@@ -1,3 +1,3 @@
-export default function precise(number: number): number {
-  return +number.toFixed(2)
+export default function precise(number: number, float = 0): number {
+  return +number.toFixed(float)
 }
