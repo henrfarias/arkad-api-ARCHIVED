@@ -1,9 +1,10 @@
 import Investment from '@domain/entity/investment'
+import { BadRequest } from '@domain/errors/base-errors/bad-request'
 import { IInputInvestmentEntity } from '@domain/interface/investment'
 import DateService from '@domain/service/date-service'
 
 describe('Investment entity', () => {
-  test('should simulate the initial investment with compound interest', () => {
+  test('Should simulate the initial investment with compound interest', () => {
     const investmentData: IInputInvestmentEntity = {
       applicationDate: new Date('2022-01-01T00:00:00.000Z'),
       dueDate: new Date('2024-01-01T00:00:00.000Z'),
@@ -30,9 +31,9 @@ describe('Investment entity', () => {
       investmentData.applicationDate,
       investmentData.dueDate
     )
-    expect(() => new Investment(investmentData, dateService)).toThrow(
-      new Error('Invalid range of date')
-    )
+    const investment = new Investment(investmentData, dateService)
+    expect(investment.isThereError()).toBeTruthy()
+    expect(investment.error).toStrictEqual(new BadRequest('Invalid range date'))
   })
 
   test('should return the gross profit from investment', () => {
